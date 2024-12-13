@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<h2>Welcome to Anime Novel</h2>
+<ul>
+    {% for list in blog_list %}
+    <li class="blog-list-item">
+        <h3><a href="{{ list.id }}">{{ list.title }}</a></h3>
+        <p>Likes: {{ list.likes }}</p>
+        <div class="actions">
+            <a href="{{ list.id }}/like/">Like</a> | 
+            <a href="{{ list.id }}/update/">Edit Synopsis</a> |
+            <a href="#" onclick="confirmDelete('{{ list.id }}')">Delete</a> 
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+
+<script>
+    function confirmDelete(postId) {
+        if (confirm("Are you sure you want to delete this post?")) {
+            window.location.href = postId + '/delete/'; 
+        }
+    }
+</script>
+{% endblock %}
